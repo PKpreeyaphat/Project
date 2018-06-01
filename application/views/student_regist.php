@@ -31,6 +31,11 @@
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="<?php echo base_url() ?>/css/themes/all-themes.css" rel="stylesheet" />
 
+    <style>
+        #tb > tbody > tr > td {
+            cursor: pointer;
+        }
+    </style>
 
 </head>
 
@@ -93,7 +98,7 @@
                                 </div>
                             </div>
                                 <h5>ช่วงเวลาที่ต้องการปฏิบัติการ <?=(isset($subject))? $subject->Subject_id.' '.$subject->Subject_name : "" ?></h5>
-                            <table class="table table-bordered display dataTable with-check">
+                            <table id="tb" class="table table-bordered display dataTable with-check">
                                 <thead>
                                     <tr>
                                         <th><center>วัน-เวลา</th>
@@ -107,75 +112,75 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr data-day="1">
                                         <th>จันทร์</th>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td data-start="8.00" data-end="9.50"></td>
+                                        <td data-start="10.00" data-end="11.50"></td>
+                                        <td data-start="12.00" data-end="13.50"></td>
+                                        <td data-start="14.00" data-end="15.50"></td>
+                                        <td data-start="16.00" data-end="17.50"></td>
+                                        <td data-start="18.00" data-end="19.50"></td>
+                                        <td data-start="20.00" data-end="21.50"></td>
                                     </tr>
-                                    <tr>
+                                    <tr data-day="2"
                                         <th>อังคาร</th>
-                                        <td></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td data-start="8.00" data-end="9.50"></td>
+                                        <td data-start="10.00" data-end="11.50"></td>
+                                        <td data-start="12.00" data-end="13.50"></td>
+                                        <td data-start="14.00" data-end="15.50"></td>
+                                        <td data-start="16.00" data-end="17.50"></td>
+                                        <td data-start="18.00" data-end="19.50"></td>
+                                        <td data-start="20.00" data-end="21.50"></td>
                                     </tr>
-                                    <tr>
+                                    <tr data-day="3">
                                         <th>พุธ</th>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td data-start="8.00" data-end="9.50"></td>
+                                        <td data-start="10.00" data-end="11.50"></td>
+                                        <td data-start="12.00" data-end="13.50"></td>
+                                        <td data-start="14.00" data-end="15.50"></td>
+                                        <td data-start="16.00" data-end="17.50"></td>
+                                        <td data-start="18.00" data-end="19.50"></td>
+                                        <td data-start="20.00" data-end="21.50"></td>
                                     </tr>
-                                    <tr>
+                                    <tr data-day="4">
                                         <th>พฤหัสบดี</th>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td></td>
+                                        <<td data-start="8.00" data-end="9.50"></td>
+                                        <td data-start="10.00" data-end="11.50"></td>
+                                        <td data-start="12.00" data-end="13.50"></td>
+                                        <td data-start="14.00" data-end="15.50"></td>
+                                        <td data-start="16.00" data-end="17.50"></td>
+                                        <td data-start="18.00" data-end="19.50"></td>
+                                        <td data-start="20.00" data-end="21.50"></td>
                                     </tr>
-                                    <tr>
+                                    <tr data-day="5">
                                         <th>ศุกร์</th>
-                                        <td></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td data-start="8.00" data-end="9.50"></td>
+                                        <td data-start="10.00" data-end="11.50"></td>
+                                        <td data-start="12.00" data-end="13.50"></td>
+                                        <td data-start="14.00" data-end="15.50"></td>
+                                        <td data-start="16.00" data-end="17.50"></td>
+                                        <td data-start="18.00" data-end="19.50"></td>
+                                        <td data-start="20.00" data-end="21.50"></td>
                                     </tr>
-                                    <tr>
+                                    <tr data-day="6">
                                         <th>เสาร์</th>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td data-start="8.00" data-end="9.50"></td>
+                                        <td data-start="10.00" data-end="11.50"></td>
+                                        <td data-start="12.00" data-end="13.50"></td>
+                                        <td data-start="14.00" data-end="15.50"></td>
+                                        <td data-start="16.00" data-end="17.50"></td>
+                                        <td data-start="18.00" data-end="19.50"></td>
+                                        <td data-start="20.00" data-end="21.50"></td>
                                     </tr>
-                                    <tr>
+                                    <tr data-day="0">
                                         <th>อาทิตย์</th>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td data-start="8.00" data-end="9.50"></td>
+                                        <td data-start="10.00" data-end="11.50"></td>
+                                        <td data-start="12.00" data-end="13.50"></td>
+                                        <td data-start="14.00" data-end="15.50"></td>
+                                        <td data-start="16.00" data-end="17.50"></td>
+                                        <td data-start="18.00" data-end="19.50"></td>
+                                        <td data-start="20.00" data-end="21.50"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -206,6 +211,18 @@
     <!-- Waves Effect Plugin Js -->
     <script src="<?php echo base_url() ?>/plugins/node-waves/waves.js"></script>
 
+     <script>
+        $(function(){
+            $('#tb').on('click', 'tbody > tr > td', function(){
+                console.log($(this).css('background-color'));
+                if($(this).css('background-color') != 'rgb(255, 204, 51)')
+                    $(this).css('background-color', '#ffcc33');
+                else
+                    $(this).css('background-color', '#fff')
+            });
+        });
+    </script>
+
     <!-- Custom Js -->
     <script src="<?php echo base_url() ?>/js/admin.js"></script>
     <script src="<?php echo base_url() ?>/js/pages/forms/basic-form-elements.js"></script>
@@ -217,7 +234,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 
     <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script> -->
 
 </body>
 
