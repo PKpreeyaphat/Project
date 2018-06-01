@@ -53,6 +53,9 @@
                                                 <div class="form-line">
                                                     <select class="form-control show-tick">
                                                         <option value="">รายวิชา</option>
+                                                        <?php foreach ($subject as $x) { ?>
+                                                            <option value="<?=$x->Subject_id?>"><?=$x->Subject_id.' '.$x->Subject_name?></option>
+                                                        <?php } ?>
                                                         <!-- <option value="MO">MO</option>
                                                         <option value="TU">TU</option>
                                                         <option value="WED">WED</option>

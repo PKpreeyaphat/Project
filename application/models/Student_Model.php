@@ -12,7 +12,7 @@ class Student_Model extends CI_Model
 
     public function getStudentByID($id)
     {
-        $this->db->where('Srtudent_id', $id);
+        $this->db->where('Student_id', $id);
         $res = $this->db->get('Student');
         return $res->result(); 
     }    

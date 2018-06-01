@@ -7,8 +7,9 @@ class HomeAdmin extends CI_Controller {
 
     public function index()
     {
-        
-        $this->load->view('home_admin');
+        $this->load->model('AllSubject_Model');
+        $data['subject'] = $this->AllSubject_Model->getSubject();
+        $this->load->view('home_admin', $data);
     }
 
     public function logout()

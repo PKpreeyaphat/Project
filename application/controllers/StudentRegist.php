@@ -7,7 +7,15 @@ class StudentRegist extends CI_Controller {
 
     public function index()
     {
-        $this->load->view('student_regist');
+        $this->load->model('Student_Model');
+        $data["user"] = $this->session->all_userdata();
+        $rs = $this->Student_Model->getStudentByID($data["user"]["user_id"]);
+        if(count($rs) > 0){
+            $data["student"] = $rs[0];
+        }
+        $this->load->model('AllSubject_Model');
+        $data['subject'] = $this->AllSubject_Model->getSubjectById($this->session->Subject_id);
+        $this->load->view('student_regist', $data);
     }
 
     // public function update()

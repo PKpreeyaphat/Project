@@ -52,20 +52,21 @@
                                 แบบฟอร์มการสมัคร
                             </h2>
                         </div>
+                        <?php
+                        ?>
                         <div class="body table-responsive">
                             <form action="<?php echo base_url()."/index.php/StudentRegist"?>" method="post">
-                            
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="" name="Student_firstname" class="form-control" value="" placeholder="ชื่อ">
+                                        <input type="text" id="" value="<?=$user["firstname"]?>" name="Student_firstname" class="form-control" placeholder="ชื่อ">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="" name="Student_lastname" class="form-control" placeholder="นามสกุล">
+                                        <input type="text" id="" value="<?=$user["lastname"]?>" name="Student_lastname" class="form-control" placeholder="นามสกุล">
                                     </div>
                                 </div>
                             </div>
@@ -73,25 +74,25 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="" name="Student_grade" class="form-control" placeholder="เกรดเฉลี่ยรายวิชา">
+                                        <input type="text" id="" value="<?=$student->Student_grade?>" name="Student_grade" class="form-control" placeholder="เกรดเฉลี่ยรายวิชา">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="" name="Student_email" class="form-control" placeholder="E-mail">
+                                        <input type="text" id="" value="<?=$student->Student_email?>" name="Student_email" class="form-control" placeholder="E-mail">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="" name="Student_tel" class="form-control" placeholder="เบอร์โทรศัพท์">
+                                        <input type="text" id="" value="<?=$student->Student_tel?>"  name="Student_tel" class="form-control" placeholder="เบอร์โทรศัพท์">
                                     </div>
                                 </div>
                             </div>
-                                <h5>ช่วงเวลาที่ต้องการปฏิบัติการ</h5>
+                                <h5>ช่วงเวลาที่ต้องการปฏิบัติการ <?=(isset($subject))? $subject->Subject_id.' '.$subject->Subject_name : "" ?></h5>
                             <table class="table table-bordered display dataTable with-check">
                                 <thead>
                                     <tr>

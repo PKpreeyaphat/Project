@@ -54,7 +54,7 @@
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                 <button class="btn btn-default m-r-15 m-t-15 waves-effect"><?=$x->Subject_id.' '.$x->Subject_name?></button>
-                                                <button type="submit" class="btn btn-success m-t-15 waves-effect">สมัคร</button>
+                                                <button name="sel-subject" data-id="<?=$x->Subject_id?>" type="submit" class="btn btn-success m-t-15 waves-effect">สมัคร</button>
                                             </div>
                                         <?php } ?>
                                     </div>
@@ -83,11 +83,25 @@
     <!-- Waves Effect Plugin Js -->
     <script src="../plugins/node-waves/waves.js"></script>
 
+    <script>
+        $( document ).ready(function() {
+            $('button[name=sel-subject]').click(function(){
+                var id = $(this).data('id');
+                console.log(id);
+                $.post("<?=base_url()?>index.php/HomeStudent/SelectSubject", {'id': id}, function(data){
+                    window.location.href = "StudentRegist";
+                });
+            });
+        });
+    </script>
+
+
     <!-- Custom Js -->
     <script src="../js/admin.js"></script>
 
     <!-- Demo Js -->
     <script src="../js/demo.js"></script>
+    
 </body>
 
 </html>
