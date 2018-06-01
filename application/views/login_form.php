@@ -33,7 +33,7 @@
         <div class="card">
             <div class="body">
                 <form id="sign_in" method="POST" action="<?php echo base_url();?>index.php/login/checklogin">
-                    <div class="msg"><i>Sign in by BUU account</i></div>
+                    <div class="msg sung"><i>Sign in by BUU account</i></div>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">person</i>

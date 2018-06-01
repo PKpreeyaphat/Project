@@ -49,9 +49,14 @@
                             <div class="row clearfix">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="form-group">
-                                            <label for="">ชื่อรายวิชา</label>
-                                            <button type="submit" class="btn btn-success m-t-15 waves-effect">สมัคร</button>
-                                        </div>    
+                                        <label for="">ชื่อรายวิชา</label>
+                                        <?php foreach ($subject as $x) { ?>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                <button class="btn btn-default m-r-15 m-t-15 waves-effect"><?=$x->Subject_id.' '.$x->Subject_name?></button>
+                                                <button type="submit" class="btn btn-success m-t-15 waves-effect">สมัคร</button>
+                                            </div>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>

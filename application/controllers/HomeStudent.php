@@ -7,8 +7,9 @@ class HomeStudent extends CI_Controller {
 
     public function index()
     {
-        
-        $this->load->view('home_student');
+        $this->load->model('AllSubject_Model');
+        $data['subject'] = $this->AllSubject_Model->getSubject();
+        $this->load->view('home_student', $data);
 
     }
 
