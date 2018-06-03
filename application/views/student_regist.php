@@ -60,7 +60,7 @@
                         <?php
                         ?>
                         <div class="body table-responsive">
-                            <form action="<?php echo base_url()."/index.php/StudentRegist"?>" method="post">
+                            <form action="<?php echo base_url()."index.php/StudentRegist"?>" method="post">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <div class="form-group">
                                     <div class="form-line">
@@ -122,7 +122,7 @@
                                         <td data-start="18.00" data-end="19.50"></td>
                                         <td data-start="20.00" data-end="21.50"></td>
                                     </tr>
-                                    <tr data-day="2"
+                                    <tr data-day="2">
                                         <th>อังคาร</th>
                                         <td data-start="8.00" data-end="9.50"></td>
                                         <td data-start="10.00" data-end="11.50"></td>
@@ -144,7 +144,7 @@
                                     </tr>
                                     <tr data-day="4">
                                         <th>พฤหัสบดี</th>
-                                        <<td data-start="8.00" data-end="9.50"></td>
+                                        <td data-start="8.00" data-end="9.50"></td>
                                         <td data-start="10.00" data-end="11.50"></td>
                                         <td data-start="12.00" data-end="13.50"></td>
                                         <td data-start="14.00" data-end="15.50"></td>
@@ -184,9 +184,10 @@
                                     </tr>
                                 </tbody>
                             </table>
-                                <center><button type="submit" class="btn btn-primary m-t-15 waves-effect">ยืนยัน</a></button>
-                                <button type="reset" class="btn btn-danger m-t-15 waves-effect">ยกเลิก</button></center>
-                                
+                                <center>
+                                    <button type="submit" class="btn btn-primary m-t-15 waves-effect">ยืนยัน</a></button>
+                                    <button type="reset" class="btn btn-danger m-t-15 waves-effect">ยกเลิก</button>
+                                </center>
                             </form>
                         </div>
                     </div>
