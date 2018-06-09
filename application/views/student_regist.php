@@ -22,6 +22,9 @@
     <!-- Animation Css -->
     <link href="<?php echo base_url() ?>/plugins/animate-css/animate.css" rel="stylesheet" />
 
+    <!-- Sweet Alert Css -->
+    <link href="<?php echo base_url() ?>/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+
     <!-- Custom Css -->
     <link href="<?php echo base_url() ?>/css/style.css" rel="stylesheet">
 
@@ -64,14 +67,14 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="" value="<?=$user["firstname"]?>" name="Student_firstname" class="form-control" placeholder="ชื่อ">
+                                        <input readonly type="text" id="" value="<?=$user["firstname"]?>" name="Student_firstname" class="form-control" placeholder="ชื่อ">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="" value="<?=$user["lastname"]?>" name="Student_lastname" class="form-control" placeholder="นามสกุล">
+                                        <input readonly type="text" id="" value="<?=$user["lastname"]?>" name="Student_lastname" class="form-control" placeholder="นามสกุล">
                                     </div>
                                 </div>
                             </div>
@@ -185,7 +188,7 @@
                                 </tbody>
                             </table>
                                 <center>
-                                    <button type="submit" class="btn btn-primary m-t-15 waves-effect">ยืนยัน</a></button>
+                                    <button <?=(isset($subject))? '':'disabled' ?> type="button" name="btnsave" class="btn btn-primary m-t-15 waves-effect">ยืนยัน</button>
                                     <button type="reset" class="btn btn-danger m-t-15 waves-effect">ยกเลิก</button>
                                 </center>
                             </form>
@@ -212,14 +215,72 @@
     <!-- Waves Effect Plugin Js -->
     <script src="<?php echo base_url() ?>/plugins/node-waves/waves.js"></script>
 
+    <!-- Sweet Alert Plugin Js -->
+    <script src="<?php echo base_url() ?>/plugins/sweetalert/sweetalert.min.js"></script>
+
      <script>
         $(function(){
+            var Subject_id = '<?=$subject->Subject_id?>'
+            var time = {
+                1:{}, 
+                2:{},
+                3:{},
+                4:{},
+                5:{},
+                6:{},
+                0:{}
+            }
+            for(var day in time){
+                time[day] = {
+                    '8.00-9.50': false, 
+                    '10.00-11.50': false, 
+                    '12.00-13.50': false, 
+                    '14.00-14.50': false, 
+                    '16.00-17.50': false, 
+                    '18.00-19.50': false, 
+                    '20.00-21.50': false
+                }
+            }
             $('#tb').on('click', 'tbody > tr > td', function(){
-                console.log($(this).css('background-color'));
-                if($(this).css('background-color') != 'rgb(255, 204, 51)')
+                // add
+                var day = $(this).parents('tr').data('day');
+                var t = $(this).data('start') + '-' + $(this).data('end');
+                if($(this).css('background-color') != 'rgb(255, 204, 51)'){
                     $(this).css('background-color', '#ffcc33');
-                else
+                    time[day][t] = true
+                }
+                // remove
+                else{
                     $(this).css('background-color', '#fff')
+                    time[day][t] = false
+                }
+                console.log(time);
+            });
+
+            
+            $('button[name=btnsave]').click(function(){
+                swal({
+                    title: "Are you sure?",
+                    text: "ต้องการสมัคร TA",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#1f91f3",
+                    confirmButtonText: "ใช่!",
+                    confirmButtonColor: "#1f91f3",
+                    cancelButtonText: "ยกเลิก!",                    
+                    closeOnConfirm: false
+                }, function () {
+                    $.post("<?=base_url()?>index.php/StudentRegist/SaveRegister", {
+                        Student_grade: $('input[name=Student_grade]').val(),
+                        Student_email: $('input[name=Student_email]').val(),
+                        Student_tel: $('input[name=Student_tel]').val(),
+                        Subject_id: Subject_id,
+                        time: JSON.stringify( time )
+                    }, function(data){
+                        console.log(data);
+                        swal("บันทึกสำเร็จ!", "รายละเอียดถูกบันทึกเรียบร้อย", "success");                        
+                    })
+                });
             });
         });
     </script>

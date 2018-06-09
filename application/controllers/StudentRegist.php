@@ -18,6 +18,47 @@ class StudentRegist extends CI_Controller {
         $this->load->view('student_regist', $data);
     }
 
+    public function SaveRegister(){
+        
+        $time = json_decode($this->input->post('time'));
+        $Subject_id = $this->input->post('Subject_id');
+        $Student_id = $this->session->userdata('user_id');
+        $Semester_ID = 2;
+
+        $Student_grade = $this->input->post('Student_grade');
+        $Student_email = $this->input->post('Student_email');
+        $Student_tel = $this->input->post('Student_tel');
+        $this->load->model('student_Model');
+        $student = $this->student_Model->getStudentByID($Student_id);
+        if(count($student) > 0){
+            $student = $student[0];
+            $student->Student_grade = $Student_grade;
+            $student->Student_email = $Student_email;
+            $student->Student_tel = $Student_tel;
+            $this->student_Model->update($Student_id, $student);
+        }
+
+        $this->load->model('Register_Model');
+        foreach($time as $day => $val)
+        {
+            foreach($val as $t => $isfree)
+            {
+                $p = explode('-',$t);
+                $data = array(
+                    'Student_id' => $Student_id,
+                    'Subject_id' => $Subject_id,
+                    'Semester_ID' => $Semester_ID,
+                    'DayofWeek' => $day,
+                    'Start' => $p[0],
+                    'End' => $p[1],
+                    'isFree' => ($isfree)? 1 : 0
+                );
+                echo json_encode($data);
+                $this->register_Model->save($data);
+            }
+        }
+    }
+
     // public function update()
     // {
     //     if($this->input->post('submit') != null) {

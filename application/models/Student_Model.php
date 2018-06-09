@@ -15,7 +15,7 @@ class Student_Model extends CI_Model
         $this->db->where('Student_id', $id);
         $res = $this->db->get('Student');
         return $res->result(); 
-    }    
+    }
 
     public function update($id, $data)
     {
