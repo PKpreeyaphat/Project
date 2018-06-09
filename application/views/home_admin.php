@@ -51,7 +51,7 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <select class="form-control show-tick">
+                                                    <select name="subject" class="form-control show-tick">
                                                         <option value="">รายวิชา</option>
                                                         <?php foreach ($subject as $x) { ?>
                                                             <option value="<?=$x->Subject_id?>"><?=$x->Subject_id.' '.$x->Subject_name?></option>
@@ -68,7 +68,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                <center><button type="submit" class="btn btn-success m-t-15 waves-effect">ตกลง</button></center>
+                                <center><button name="btnok" type="button" class="btn btn-success m-t-15 waves-effect">ตกลง</button></center>
                             </form>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                         </div>
                         <div class="body">
                             <div class="body table-responsive">
-                                <table class="table">
+                                <table class="table table-center">
                                     <thead>
                                         <tr>
                                             <!-- <th>
@@ -99,23 +99,7 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <?php foreach ($room as $x) { ?>
-                                        <tr>
-                                            <!-- <td>
-                                                <center>
-                                                    <?php echo $x->Room_id ?>
-                                            </td> -->
-                                            <td>
-                                                <center>
-                                                    <?php echo $x->Room_name ?>
-                                            </td>
-                                            <td>
-                                                <center>
-                                                    <button type="button" class="btn btn-danger btn-delete waves-effect m-r-20" data-toggle="modal" data-target="#deleteRoomModal">ลบ</button>
-                                            </td>
-                                        </tr>
-                                        <?php } ?>
+                                    <tbody id="tbody">
                                     </tbody>
                                 </table>
                             </div>
@@ -141,6 +125,23 @@
 
     <!-- Waves Effect Plugin Js -->
     <script src="<?php echo base_url() ?>/plugins/node-waves/waves.js"></script>
+
+    <script>
+        $(function(){
+            $('button[name=btnok]').click(function(){
+                var subject_id = $('select[name=subject]').val();
+                $.post("<?=base_url()?>index.php/HomeAdmin/Students", { subject_id: subject_id }, function(data){
+                    data = JSON.parse(data);
+                    var html = '';
+                    for(var i in data){
+                        html += '<tr><td>'+data[i].Student_id+'</td>'+
+                            '<td>'+data[i].Student_firstname+' '+data[i].Student_lastname+'</td></tr>';
+                    }
+                    $('#tbody').html(html);
+                });
+            });
+        })
+    </script>
 
     <!-- Custom Js -->
     <script src="<?php echo base_url() ?>/js/admin.js"></script>

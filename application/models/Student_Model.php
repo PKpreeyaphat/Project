@@ -17,6 +17,41 @@ class Student_Model extends CI_Model
         return $res->result(); 
     }
 
+    public function getRegister($Student_id, $Subject_id, $Semester_ID)
+    {
+        $this->db->from('Register');
+        $this->db->where('Student_id', $Student_id);
+        $this->db->where('Subject_id', $Subject_id);
+        $this->db->where('Semester_ID', $Semester_ID);
+        $result = $this->db->get()->result();
+        return $result;
+    }
+
+    public function getRegisterList($Student_id, $Subject_id, $Semester_ID)
+    {
+        $this->db->from('Register');
+        $this->db->where('Student_id', $Student_id);
+        $this->db->where('Subject_id', $Subject_id);
+        $this->db->where('Semester_ID', $Semester_ID);
+        $result = $this->db->get()->result();
+
+        $array = array();
+        foreach($result as $row){
+            $array[$row->DayofWeek][$row->Start.'-'.$row->End] = ($row->isFree == 1)? true: false;
+        }
+        return $array;
+    }
+
+    public function deleteRegister($Student_id, $Subject_id, $Semester_ID)
+    {
+        $this->db->where('Student_id', $Student_id);
+        $this->db->where('Subject_id', $Subject_id);
+        $this->db->where('Semester_ID', $Semester_ID);
+        $this->db->delete('Register');
+
+    }
+
+
     public function update($id, $data)
     {
         $this->db->where('Student_id', $id);

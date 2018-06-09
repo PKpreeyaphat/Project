@@ -1,5 +1,10 @@
 ﻿/* Navbar ====================================== */
 @import url(materialize.css);
+
+.table-center > tbody > tr{
+  text-align: center;
+}
+
 .navbar {
   font-family: "Roboto", sans-serif;
   -webkit-border-radius: 0;

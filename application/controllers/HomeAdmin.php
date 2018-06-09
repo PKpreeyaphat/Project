@@ -12,6 +12,14 @@ class HomeAdmin extends CI_Controller {
         $this->load->view('home_admin', $data);
     }
 
+    public function Students()
+    {
+        $this->load->model('AllSubject_Model');
+        $subject = $this->input->post('subject_id');
+        $students = $this->AllSubject_Model->getStudent($subject);
+        echo json_encode($students);
+    }
+
     public function logout()
     {
         $this->session->sess_destroy();

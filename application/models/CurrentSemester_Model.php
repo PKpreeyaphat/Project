@@ -17,6 +17,14 @@ class CurrentSemester_Model extends CI_Model
         return 0;
     }
 
+    public function getSemester(){
+        $rs = $this->getAllCurSemester();
+        if(count($rs) > 0){
+            return $rs[0];
+        }
+        return null;
+    }
+
     public function save($data)
     {
         $this->deleteAllCurSemester();
@@ -30,7 +38,8 @@ class CurrentSemester_Model extends CI_Model
 
     public function getAllCurSemester()
     {
-        return $this->db->get('CurrentSemester')->result();
+        return $this->db->query("SELECT Semester.Semester_ID, Semester_Name, Semester.Semester_Year, isOpen 
+        FROM CurrentSemester NATURAL JOIN Semester")->result();
     }
 
 }

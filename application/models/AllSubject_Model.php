@@ -21,6 +21,16 @@ class AllSubject_Model extends CI_Model {
         return $query->result();
     }
 
+    public function getStudent($subject_id)
+    {
+        $query_str="SELECT stu.* FROM Student stu NATURAL JOIN Register reg
+            WHERE reg.Subject_id = '".$subject_id."'
+            GROUP BY stu.Student_id, stu.Student_firstname, stu.Student_lastname, stu.Student_grade,
+            stu.Student_email,stu.Student_tel";
+        $query = $this->db->query($query_str);
+        return $query->result();
+    }
+
     public function getSubjectById($id)
     {
         $query = $this->db->where('Subject_id', $id);

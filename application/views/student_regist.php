@@ -100,7 +100,7 @@
                                     </div>
                                 </div>
                             </div>
-                                <h5>ช่วงเวลาที่ต้องการปฏิบัติการ <?=(isset($subject))? $subject->Subject_id.' '.$subject->Subject_name : "" ?></h5>
+                            <h5>ช่วงเวลาที่ต้องการปฏิบัติการ <?=(isset($subject))? $subject->Subject_id.' '.$subject->Subject_name : "" ?></h5>
                             <table id="tb" class="table table-bordered display dataTable with-check">
                                 <thead>
                                     <tr>
@@ -189,7 +189,7 @@
                             </table>
                                 <center>
                                     <button <?=(isset($subject))? '':'disabled' ?> type="button" name="btnsave" class="btn btn-primary m-t-15 waves-effect">ยืนยัน</button>
-                                    <button type="reset" class="btn btn-danger m-t-15 waves-effect">ยกเลิก</button>
+                                    <button name="btnDelete" type="reset" class="btn btn-danger m-t-15 waves-effect">ยกเลิก</button>
                                 </center>
                             </form>
                         </div>
@@ -221,6 +221,7 @@
      <script>
         $(function(){
             var Subject_id = '<?=$subject->Subject_id?>'
+            var json = JSON.parse('<?=json_encode($register)?>')
             var time = {
                 1:{}, 
                 2:{},
@@ -230,18 +231,38 @@
                 6:{},
                 0:{}
             }
-
-            for(var day in time){
-                time[day] = {
-                    '8.00-9.50': false, 
-                    '10.00-11.50': false, 
-                    '12.00-13.50': false, 
-                    '14.00-15.50': false, 
-                    '16.00-17.50': false, 
-                    '18.00-19.50': false, 
-                    '20.00-21.50': false
+            if(json.length > 0){
+                time = json;
+            }
+            else{
+                for(var day in time){
+                    time[day] = {
+                        '8.00-9.50': false, 
+                        '10.00-11.50': false, 
+                        '12.00-13.50': false, 
+                        '14.00-15.50': false, 
+                        '16.00-17.50': false, 
+                        '18.00-19.50': false, 
+                        '20.00-21.50': false
+                    }
                 }
             }
+
+            var draw = function()
+            {
+                console.log(time);
+                for(var day in time){
+                    for(var t in time[day]){
+                        var t_r = t.split('-');
+                        if(time[day][t]){
+                            $('tr[data-day='+day+']').find('td[data-start="'+t_r[0]+'"][data-end="'+t_r[1]+'"]')
+                                .css('background-color', '#ffcc33');
+                        }
+                    }
+                }
+            };
+
+            draw();
             $('#tb').on('click', 'tbody > tr > td', function(){
                 // add
                 var day = $(this).parents('tr').data('day');
@@ -279,9 +300,8 @@
                         Subject_id: Subject_id,
                         time: JSON.stringify( time )
                     }, function(data){
-                        console.log(data);
                         swal("บันทึกสำเร็จ!", "รายละเอียดถูกบันทึกเรียบร้อย", "success");
-                        window.location.href = 'HomeStudent';                 
+                        //window.location.href = 'HomeStudent';                 
                     })
                 });
             });

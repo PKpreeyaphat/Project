@@ -9,9 +9,10 @@ class HomeStudent extends CI_Controller {
     {
         $this->load->model('CurrentSemester_Model');
         $Student_id = $this->session->userdata('user_id');
-        $Semester_ID = $this->CurrentSemester_Model->getSemester_ID();
+        $Semester = $this->CurrentSemester_Model->getSemester();
         $this->load->model('AllSubject_Model');
-        $data['subject'] = $this->AllSubject_Model->getUnRegister($Student_id, $Semester_ID);
+        $data['subject'] = $this->AllSubject_Model->getUnRegister($Student_id, $Semester->Semester_ID);
+        $data['semester'] = $Semester;
         $this->load->view('home_student', $data);
     }
 

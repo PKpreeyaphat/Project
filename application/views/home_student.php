@@ -43,7 +43,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
                     <div class="header">
-                        <h2> รายวิชาที่เปิดรับสมัคร</h2>
+                        <h2> รายวิชาที่เปิดรับสมัคร ภาคเรียนที่ <?=$semester->Semester_Name?></h2>
                     </div>
                         <div class="body">
                             <div class="row clearfix">
@@ -54,9 +54,20 @@
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                 <button class="btn btn-default m-r-15 m-t-15 waves-effect"><?=$x->Subject_id.' '.$x->Subject_name?></button>
-                                                <button name="<?=($x->Student_id == null)? 'sel-subject': ''?>" data-id="<?=($x->Student_id == null)? $x->Subject_id: ''?>" 
+                                                <?php
+                                                if($semester->isOpen == 1){
+                                                    ?>
+                                                    <button name="sel-subject" data-id="<?=$x->Subject_id?>" 
                                                     type="<?=($x->Student_id == null)? 'submit': 'button'?>" 
-                                                    class="btn btn-success m-t-15 waves-effect"><?=($x->Student_id == null)? 'สมัคร': 'สมัครแล้ว'?></button>
+                                                    class="btn btn-success m-t-15 waves-effect"><?=($x->Student_id == null)? 'สมัคร' : 'สมัครแล้ว'?></button>
+                                                <?php
+                                                }
+                                                else if($x->Student_id != null){
+                                                ?>
+                                                    <button name="sel-subject" data-id="<?=$x->Subject_id?>" type="button" class="btn btn-success m-t-15 waves-effect">สมัครแล้ว</button>
+                                                <?php
+                                                }
+                                                ?>
                                             </div>
                                         <?php } ?>
                                     </div>

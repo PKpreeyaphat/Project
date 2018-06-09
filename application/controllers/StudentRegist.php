@@ -8,18 +8,32 @@ class StudentRegist extends CI_Controller {
     public function index()
     {
         $this->load->model('Student_Model');
+        $this->load->model('AllSubject_Model');
+        $this->load->model('CurrentSemester_Model');
         $data["user"] = $this->session->all_userdata();
         $rs = $this->Student_Model->getStudentByID($data["user"]["user_id"]);
         if(count($rs) > 0){
             $data["student"] = $rs[0];
         }
-        $this->load->model('AllSubject_Model');
+        $Semester_ID = $this->CurrentSemester_Model->getSemester_ID();
+        $data['register'] = $this->Student_Model->getRegisterList(
+            $data["user"]["user_id"], 
+            $this->session->Subject_id, 
+            $Semester_ID);
         $data['subject'] = $this->AllSubject_Model->getSubjectById($this->session->Subject_id);
         $this->load->view('student_regist', $data);
     }
 
-    public function SaveRegister(){
-        
+    public function DeleteRegister(){
+        $this->load->model('Student_Model');
+        $Subject_id = $this->input->post('Subject_id');
+        $Student_id = $this->session->userdata('user_id');
+        $Semester_ID = $this->session->Semester_ID;
+
+        $this->Student_Model->deleteRegister($Student_id, $Subject_id, $Semester_ID);
+    }
+
+    public function SaveRegister(){ 
         $time = json_decode($this->input->post('time'));
         $Subject_id = $this->input->post('Subject_id');
         $Student_id = $this->session->userdata('user_id');
