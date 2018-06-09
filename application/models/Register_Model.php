@@ -4,33 +4,44 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Register_Model extends CI_Model
 {
+    public function insert($data)
+    {
+        $this->db->insert('Register', $data);
+    }
+
+    public function update($id, $data)
+    {
+        $this->db->where('idRegister', $id);
+        $this->db->update('Register', $data);
+        return true;
+    }
 
     public function save($data)
     {
-        if(true){
-            echo json_encode($data);
-            //$this->db->insert('Register', $data);
+        if(count($this->getRegister($data)) == 0){
+            $this->db->insert('Register', $data);
         }
         else{
-            // $this->db->where('Student_id', $data->Student_id);
-            // $this->db->where('Subject_id', $data->Subject_id);
-            // $this->db->where('DayofWeek', $data->DayofWeek);
-            // $this->db->where('Start', $data->Start);
-            // $this->db->where('End', $data->End);
-            // $this->db->where('Semester_ID', $data->Semester_ID);
-            //$this->db->update('Register', $data);
+            $this->db->where('Student_id', $data['Student_id']);
+            $this->db->where('Subject_id', $data['Subject_id']);
+            $this->db->where('DayofWeek', $data['DayofWeek']);
+            $this->db->where('Start', $data['Start']);
+            $this->db->where('End', $data['End']);
+            $this->db->where('Semester_ID', $data['Semester_ID']);
+            $this->db->update('Register', $data);
         }
     }
 
     public function getRegister($data)
     {
-        // $this->db->where('Student_id', $data->Student_id);
-        // $this->db->where('Subject_id', $data->Subject_id);
-        // $this->db->where('DayofWeek', $data->DayofWeek);
-        // $this->db->where('Start', $data->Start);
-        // $this->db->where('End', $data->End);
-        // $this->db->where('Semester_ID', $data->Semester_ID);
-        $query = $this->db->get('Register');
+        $this->db->from('Register');
+        $this->db->where('Student_id', $data['Student_id']);
+        $this->db->where('Subject_id', $data['Subject_id']);
+        $this->db->where('DayofWeek', $data['DayofWeek']);
+        $this->db->where('Start', $data['Start']);
+        $this->db->where('End', $data['End']);
+        $this->db->where('Semester_ID', $data['Semester_ID']);
+        $query = $this->db->get();
         return $query->result(); 
     }
 
@@ -41,10 +52,9 @@ class Register_Model extends CI_Model
 
     public function getAllRegister()
     {
-        $query = $this->db->get('Register');
-        return $query->result();
+        return $this->db->get('Register')->result();
     }
 
 }
 
-/* End of file Student_Model.php */
+/* End of file Register_Model.php */

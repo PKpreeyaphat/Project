@@ -11,6 +11,16 @@ class AllSubject_Model extends CI_Model {
         return $query->result();
     }
 
+    public function getUnRegister($student_id, $semester_id)
+    {
+        $query_str="SELECT sj.Subject_id, sj.Subject_name, reg.Student_id
+            from Subject sj LEFT JOIN Register reg ON sj.Subject_id = reg.Subject_id AND reg.Student_id = '".$student_id."' 
+            AND Semester_ID = ".$semester_id."
+            GROUP BY sj.Subject_id, sj.Subject_name, reg.Student_id";
+        $query = $this->db->query($query_str);
+        return $query->result();
+    }
+
     public function getSubjectById($id)
     {
         $query = $this->db->where('Subject_id', $id);

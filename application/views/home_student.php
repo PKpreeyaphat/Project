@@ -54,7 +54,9 @@
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                 <button class="btn btn-default m-r-15 m-t-15 waves-effect"><?=$x->Subject_id.' '.$x->Subject_name?></button>
-                                                <button name="sel-subject" data-id="<?=$x->Subject_id?>" type="submit" class="btn btn-success m-t-15 waves-effect">สมัคร</button>
+                                                <button name="<?=($x->Student_id == null)? 'sel-subject': ''?>" data-id="<?=($x->Student_id == null)? $x->Subject_id: ''?>" 
+                                                    type="<?=($x->Student_id == null)? 'submit': 'button'?>" 
+                                                    class="btn btn-success m-t-15 waves-effect"><?=($x->Student_id == null)? 'สมัคร': 'สมัครแล้ว'?></button>
                                             </div>
                                         <?php } ?>
                                     </div>

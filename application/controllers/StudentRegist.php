@@ -23,7 +23,7 @@ class StudentRegist extends CI_Controller {
         $time = json_decode($this->input->post('time'));
         $Subject_id = $this->input->post('Subject_id');
         $Student_id = $this->session->userdata('user_id');
-        $Semester_ID = 2;
+        $Semester_ID = $this->session->Semester_ID;
 
         $Student_grade = $this->input->post('Student_grade');
         $Student_email = $this->input->post('Student_email');
@@ -53,10 +53,10 @@ class StudentRegist extends CI_Controller {
                     'End' => $p[1],
                     'isFree' => ($isfree)? 1 : 0
                 );
-                echo json_encode($data);
-                $this->register_Model->save($data);
+                $this->Register_Model->save($data);
             }
         }
+        $this->session->Subject_id = '';
     }
 
     // public function update()

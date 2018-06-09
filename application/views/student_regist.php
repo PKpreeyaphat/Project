@@ -230,12 +230,13 @@
                 6:{},
                 0:{}
             }
+
             for(var day in time){
                 time[day] = {
                     '8.00-9.50': false, 
                     '10.00-11.50': false, 
                     '12.00-13.50': false, 
-                    '14.00-14.50': false, 
+                    '14.00-15.50': false, 
                     '16.00-17.50': false, 
                     '18.00-19.50': false, 
                     '20.00-21.50': false
@@ -268,7 +269,8 @@
                     confirmButtonText: "ใช่!",
                     confirmButtonColor: "#1f91f3",
                     cancelButtonText: "ยกเลิก!",                    
-                    closeOnConfirm: false
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
                 }, function () {
                     $.post("<?=base_url()?>index.php/StudentRegist/SaveRegister", {
                         Student_grade: $('input[name=Student_grade]').val(),
@@ -278,7 +280,8 @@
                         time: JSON.stringify( time )
                     }, function(data){
                         console.log(data);
-                        swal("บันทึกสำเร็จ!", "รายละเอียดถูกบันทึกเรียบร้อย", "success");                        
+                        swal("บันทึกสำเร็จ!", "รายละเอียดถูกบันทึกเรียบร้อย", "success");
+                        window.location.href = 'HomeStudent';                 
                     })
                 });
             });
