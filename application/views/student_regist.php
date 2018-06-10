@@ -67,14 +67,14 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input readonly type="text" id="" value="<?=$user["firstname"]?>" name="Student_firstname" class="form-control" placeholder="ชื่อ">
+                                        <input readonly type="text" id="" value="<?=(isset($student))? $student->Student_firstname : ''?>" name="Student_firstname" class="form-control" placeholder="ชื่อ">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input readonly type="text" id="" value="<?=$user["lastname"]?>" name="Student_lastname" class="form-control" placeholder="นามสกุล">
+                                        <input readonly type="text" id="" value="<?=(isset($student))? $student->Student_lastname : ''?>" name="Student_lastname" class="form-control" placeholder="นามสกุล">
                                     </div>
                                 </div>
                             </div>
