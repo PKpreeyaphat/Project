@@ -75,12 +75,12 @@
                                 <div class="form-group">
                                     <div class="form-line">
 
-                                        <input value="<?=$student->Student_grade?>" type="text" id="" name="grade" class="form-control" placeholder="E-mail">
+                                        <input value="<?=(isset($student))? $student->Student_grade : ''?>" type="text" id="" name="grade" class="form-control" placeholder="E-mail">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input value="<?=$student->Student_tel?>" type="text" id="" name="tel" class="form-control" placeholder="เบอร์โทรศัพท์">
+                                        <input value="<?=(isset($student))? $student->Student_tel : ''?>" type="text" id="" name="tel" class="form-control" placeholder="เบอร์โทรศัพท์">
                                     </div>
                                 </div>
                                 <button name="btnSave" type="button" class="btn btn-success m-t-15 waves-effect">ตกลง</button>
