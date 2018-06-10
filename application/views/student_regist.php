@@ -188,7 +188,8 @@
                                 </tbody>
                             </table>
                                 <center>
-                                    <button <?=(isset($subject))? '':'disabled' ?> type="button" name="btnsave" class="btn btn-primary m-t-15 waves-effect">ยืนยัน</button>
+                                    <button <?=(isset($subject) && (isset($semester) && $semester->isOpen))? '':'disabled' ?> 
+                                    type="button" name="btnsave" class="btn btn-primary m-t-15 waves-effect">ยืนยัน</button>
                                     <button name="btnDelete" type="reset" class="btn btn-danger m-t-15 waves-effect">ยกเลิก</button>
                                 </center>
                             </form>
@@ -250,7 +251,6 @@
 
             var draw = function()
             {
-                console.log(time);
                 for(var day in time){
                     for(var t in time[day]){
                         var t_r = t.split('-');
@@ -279,7 +279,9 @@
                 console.log(time);
             });
 
-            
+            <?php
+                if(isset($subject) && (isset($semester) && $semester->isOpen))
+                { ?>
             $('button[name=btnsave]').click(function(){
                 swal({
                     title: "Are you sure?",
@@ -305,6 +307,8 @@
                     })
                 });
             });
+
+            <?php } ?>
         });
     </script>
 

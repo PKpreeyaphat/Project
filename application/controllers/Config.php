@@ -8,7 +8,22 @@ class Config extends CI_Controller {
     public function index()
     {
         $this->load->model('CurrentSemester_Model');
-        $data['semester'] = $this->CurrentSemester_Model->getSemester();
+        $this->load->model('Semester_Model');
+        $semester = $this->CurrentSemester_Model->getSemester();
+        $last = $this->Semester_Model->Last();
+        if(count($last) > 0){
+            $last = $last[0];
+            if($semester->Semester_ID != $last->Semester_ID){
+                $data = array(
+                    'Semester_ID' => $last->Semester_ID,
+                    'isOpen' => 0
+                );
+                $this->CurrentSemester_Model->save($data);
+                $semester = $this->CurrentSemester_Model->getSemester();
+            }
+        }
+
+        $data['semester'] = $semester;
         $this->load->view('config_view', $data);
     }
     
@@ -18,7 +33,6 @@ class Config extends CI_Controller {
         $this->load->model('Semester_Model');
 
         $isOpen = $this->input->get('isOpen');
-        echo $isOpen;
         $last = $this->Semester_Model->Last();
         if(count($last) > 0)
         {

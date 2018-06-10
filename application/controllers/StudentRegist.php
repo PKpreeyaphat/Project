@@ -10,20 +10,26 @@ class StudentRegist extends CI_Controller {
         $this->load->model('Student_Model');
         $this->load->model('AllSubject_Model');
         $this->load->model('CurrentSemester_Model');
+        $this->load->model('CurrentSemester_Model');
         $Semester_ID = $this->CurrentSemester_Model->getSemester_ID();
         $Subject_id = $this->session->Subject_id;
         $data["user"] = $this->session->all_userdata();
-
+        //
         $rs = $this->Student_Model->getGradeSubject($data["user"]["user_id"], $Subject_id, $Semester_ID);
         if(count($rs) > 0){
             $data["student"] = $rs[0];
         }
-       
+        //
+        //
         $data['register'] = $this->Student_Model->getRegisterList(
             $data["user"]["user_id"], 
             $Subject_id, 
             $Semester_ID);
         $data['subject'] = $this->AllSubject_Model->getSubjectById($Subject_id);
+        //
+        
+        $data['semester'] = $this->CurrentSemester_Model->getSemester();
+
         $this->load->view('student_regist', $data);
     }
 
