@@ -128,7 +128,7 @@
 
     <script>
         $(function(){
-            $('button[name=btnok]').click(function(){
+            var LoadData = function(){
                 var subject_id = $('select[name=subject]').val();
                 $.post("<?=base_url()?>index.php/HomeAdmin/Students", { subject_id: subject_id }, function(data){
                     data = JSON.parse(data);
@@ -139,7 +139,14 @@
                     }
                     $('#tbody').html(html);
                 });
+            };
+            $('button[name=btnok]').click(function(){
+                LoadData();
             });
+
+            $('select[name=subject]').change(function(){
+                LoadData();
+            })
         })
     </script>
 
