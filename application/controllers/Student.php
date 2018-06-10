@@ -20,14 +20,14 @@ class Student extends CI_Controller {
     public function SaveStudent(){
         $this->load->model('Student_Model');
 
-        $grade = $this->input->post('grade');
+        $email = $this->input->post('email');
         $tel = $this->input->post('tel');
 
         $data["user"] = $this->session->all_userdata();
         $rs = $this->Student_Model->getStudentByID($data["user"]["user_id"]);
         if(count($rs) > 0){
             $student = $rs[0];
-            $student->Student_grade = $grade;
+            $student->Student_email = $email;
             $student->Student_tel = $tel;
             $this->Student_Model->update($student->Student_id, $student);
         }
