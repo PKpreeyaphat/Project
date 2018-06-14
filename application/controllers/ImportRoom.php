@@ -6,6 +6,21 @@ class ImportRoom extends CI_Controller
 {
     private $comfirmData;
 
+    public function __construct() 
+    {
+        parent::__construct();
+
+        if(!isset($this->session))
+        {
+            redirect('Login');
+            return;
+        }
+        $Username = $this->session->userdata('user_id');
+        if(is_numeric($Username)){
+            redirect('HomeStudent');
+        }
+    }
+
     public function index()
     {
         $this->load->model('Room_Model');
